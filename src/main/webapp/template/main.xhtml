@@ -1,0 +1,62 @@
+<html xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<f:view contentType="text/html" locale="#currentLocale" />
+
+<h:head>
+	<title>#{messages['main.app.title']}</title>
+	<link type="text/css" rel="stylesheet" href="css/style.css" />
+</h:head>
+
+<!--<h:body style="background-color:#f1f1f1">-->
+<h:body
+	style="background-image:url(images/logouno.png);
+	background-repeat:no-repeat no-repeat center center fixed;
+	background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        background-opacity:0.4;
+          background-filter:alpha(opacity=40);">
+	<!--        Background-color: transparent;-->
+	<!--         filter:alpha(opacity=50);-->
+	<!--         -moz-opacity:.50;opacity:.50;">-->
+
+	<!--<h:body class="style">-->
+	<table style="width: 100%">
+		<!--        <table class="tableStyle">	-->
+		<tr>
+			<td><ui:include src="/menu.xhtml" />
+			</td>
+			<td valign="top" width="20%" align="left"><p:panel
+					style="height:38px;">
+					<div style="vertical-align: middle;">
+						#{usuarioListMB.setUserN(request.userPrincipal)} <img
+							src="images/funcionarios/5311244.jpg" height="30" />
+						#{usuarioListMB.userN}
+					</div>
+				</p:panel></td>
+		</tr>
+		<tr valign="top">
+			<td height="400" colspan="2"><ui:insert name="body" />
+			</td>
+		</tr>
+
+	</table>
+
+	<p:growl id="messages" globalOnly="true" />
+
+	<p:ajaxStatus style="width:16px;height:16px;">
+		<f:facet name="start">
+		</f:facet>
+
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+	<link type="text/css" rel="styleslheet" href="css/aristo/skin.css" />
+</h:body>
+</html>

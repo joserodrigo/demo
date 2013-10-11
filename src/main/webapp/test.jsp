@@ -1,0 +1,1 @@
+<%=request.getUserPrincipal().getName()%>

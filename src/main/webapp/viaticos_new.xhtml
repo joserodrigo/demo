@@ -1,0 +1,175 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton image="ui-icon ui-icon-disk"
+						value="#{messages['boton.guardar']}"
+						action="#{bookmarkEditMB.insert}"
+						rendered="#{!bookmarkEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['boton.guardar']}"
+						action="#{bookmarkEditMB.update}"
+						rendered="#{bookmarkEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['boton.eliminar']}"
+						onclick="confirmation.show()"
+						rendered="#{bookmarkEditMB.updateMode}" type="button"
+						immediate="true" ajax="false" />
+
+					<p:commandButton image="ui-icon ui-icon-close"
+						value="#{messages['boton.cancelar']}"
+						action="#{bookmarkEditMB.insert}"
+						rendered="#{!bookmarkEditMB.updateMode}" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}"
+						showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert"
+						widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}"
+							action="#{bookmarkEditMB.delete}" immediate="true" ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}"
+							onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<br />
+
+			<p:fieldset legend="#{messages['viaticos.asignados']}"
+				toggleable="true" toggleSpeed="500">
+				<p:panel header="Funcionarios" toggleable="true" toggleSpeed="300"
+					toggleOrientation="horizontal">
+					<p:dataTable var="funcionarios" rowKey="#{car.model}" value=""
+						paginator="true" rows="10" selectionMode="single">
+						<f:facet name="header">  
+                             Lista de Funcionarios 
+                         </f:facet>
+						<p:column id="modelColumn" filterBy="#{car.model}"
+							style="width:35%" headerText="Nombres" size="35">
+							<h:outputText value="" />
+
+						</p:column>
+						<p:column id="modelColumna" filterBy="#{car.model}"
+							headerText="C.I" style="width:15%">
+							<h:outputText value="" />
+						</p:column>
+						<p:column id="modelColumn1" style="width:40%">
+							<f:facet name="header">  
+                              Departamento 
+                            </f:facet>
+						</p:column>
+						<p:column style="width:4%">
+							<h:selectBooleanCheckbox value="" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+				<table border="0">
+					<tr>
+						<th>#{messages['viaticos.asignados.nro']}</th>
+						<th>#{messages['viaticos.asignados.Beneficiarios']}</th>
+						<th>#{messages['viaticos.asignados.cedula']}</th>
+						<th>#{messages['viaticos.asignados.totaldias']}</th>
+						<th>#{messages['viaticos.asignados.Alojamiento']}</th>
+
+					</tr>
+					<tr>
+						<td><p:inputText readonly="true" value="1" size="2" /></td>
+						<td><p:inputText readonly="false" value="" size="30" /></td>
+						<td><p:inputText readonly="true" value="" size="20" /></td>
+						<td><p:spinner style="width:100%" min="0" /></td>
+						<td align="center"><h:selectBooleanCheckbox value="" /></td>
+					</tr>
+					<tr>
+						<td><p:inputText readonly="true" value="2" size="2" /></td>
+						<td><p:inputText readonly="false" value="" size="30" /></td>
+						<td><p:inputText readonly="true" value="" size="20" /></td>
+						<td><p:spinner style="width:100%" min="0" />
+						</td>
+						<td align="center"><h:selectBooleanCheckbox value="" />
+						</td>
+					</tr>
+					<tr>
+						<td><p:inputText readonly="true" value="3" size="2" /></td>
+						<td><p:inputText readonly="false" value="" size="30" /></td>
+						<td><p:inputText readonly="true" value="" size="20" /></td>
+						<td><p:spinner style="width:100%" min="0" />
+						</td>
+						<td align="center"><h:selectBooleanCheckbox value="" />
+						</td>
+					</tr>
+					<tr>
+						<td><p:inputText readonly="true" value="4" size="2" /></td>
+						<td><p:inputText readonly="false" value="" size="30" /></td>
+						<td><p:inputText readonly="true" value="" size="20" /></td>
+						<td><p:spinner style="width:100%" min="0" />
+						</td>
+						<td align="center"><h:selectBooleanCheckbox value="" />
+						</td>
+					</tr>
+					<tr>
+						<td><p:inputText readonly="true" value="5" size="2" /></td>
+						<td><p:inputText readonly="false" value="" size="30" /></td>
+						<td><p:inputText readonly="true" value="" size="20" /></td>
+						<td><p:spinner style="width:100%" min="0" />
+						</td>
+						<td align="center"><h:selectBooleanCheckbox value="" /></td>
+
+					</tr>
+				</table>
+
+
+			</p:fieldset>
+			<br />
+			<p:fieldset legend="#{messages['viaticos.datosadicionales']}"
+				toggleable="true" toggleSpeed="500">
+				<table border="0">
+					<tr>
+						<td>#{messages['viaticos.datosadicionales.motivo']}</td>
+						<td><p:keyboard value="#{keyboardBean.value2}" size="80" />
+							<h:outputText value="#{keyboardBean.value2}" />
+						</td>
+					</tr>
+					<tr>
+						<td>#{messages['viaticos.datosadicionales.fechasalida']}</td>
+						<td><p:calendar showOn="button" pattern="MM/dd/yyyy"
+								navigator="true" effect="explode" />
+							#{messages['viaticos.datosadicionales.fecharegreso']} <p:calendar
+								showOn="button" pattern="dd/MM/yyyy" navigator="true"
+								effect="explode" /></td>
+					</tr>
+					<tr>
+						<td>#{messages['viaticos.datosadicionales.localidades']}</td>
+						<td><h:selectOneListbox value="" size="1">
+								<f:selectItem itemlabel="Asuncion" itemValue="Localidades" />
+								<f:selectItem itemLabel="Caacupe" itemValue="2" />
+								<f:selectItem itemLabel="Capiata" itemValue="3" />
+
+							</h:selectOneListbox>
+						</td>
+					</tr>
+					<tr>
+						<td>#{messages['viaticos.datosadicionales.departamento']}</td>
+						<td><h:selectOneListbox value="" size="1">
+								<f:selectItem itemlabel="Concepcion" itemValue="Departamentos" />
+								<f:selectItem itemLabel="San Pedro del Ycuamandiyu"
+									itemDescription="San Pedro" itemValue="2" />
+								<f:selectItem itemLabel="Cordillera" itemValue="3" />
+								<f:selectItem itemLabel="Guaira" itemValue="4" />
+								<f:selectItem itemLabel="Caaguazu" itemValue="5" />
+								<f:selectItem itemLabel="Caazapa" itemValue="6" />
+							</h:selectOneListbox>
+						</td>
+					</tr>
+					<tr>
+						<td>#{messages['viaticos.datosadicionales.itemptv']}</td>
+						<td><p:inputText readonly="false" value="" size="80" /></td>
+					</tr>
+				</table>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

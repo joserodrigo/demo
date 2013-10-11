@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form>
+		<p:menubar autoSubmenuDisplay="true">
+			<p:menuitem icon="ui-icon ui-icon-home" value="Inicio"
+				url="/index.jsf" />
+			<p:submenu icon="ui-icon ui-icon-document"
+				label="#{messages['menu.tramites']}">
+				<p:submenu icon="ui-icon ui-icon-contact" image="ui-icon-document"
+					label="#{messages['menu.new']}">
+					<p:menuitem value="Viatico" url="/viaticos_new.jsf" />
+					<p:menuitem value="Combustible" url="/x.jsf" />
+					<p:menuitem value="Permiso" url="/x.jsf" />
+					<p:menuitem value="Vacaciones" url="/x.jsf" />
+				</p:submenu>
+				<p:menuitem icon="ui-icon ui-icon-pencil"
+					value="#{messages['menu.tramites.list']}" url="/documents_list.jsf" />
+			</p:submenu>
+
+			<p:submenu icon="ui-icon ui-icon-document" label="Planes">
+				<p:menuitem icon="ui-icon ui-icon-bullet" value="Viajes"
+					url="/bookmark_edit.jsf" />
+			</p:submenu>
+
+			<p:submenu icon="ui-icon ui-icon-gear"
+				label="#{messages['menu.administrator']}">
+				<p:menuitem icon="ui-icon ui-icon-person"
+					value="#{messages['menu.usuario']}" url="/admin/usuario_list.jsf" />
+				<p:menuitem icon="ui-icon ui-icon-clipboard"
+					value="#{messages['menu.rol']}" url="/admin/rol_list.jsf" />
+			</p:submenu>
+
+			<p:submenu icon="ui-icon ui-icon-wrench"
+				label="#{messages['menu.menuitem.referenciales']}">
+				<p:menuitem icon="ui-icon ui-icon-arrowthick-1-s"
+					value="#{messages['menu.section']}" url="/section_list.jsf" />
+			    <p:menuitem icon="ui-icon ui-icon-arrowthick-1-s"
+					value="#{messages['menu.funcionarios']}" url="/official_list.jsf" />
+			</p:submenu>
+
+			<p:menuitem icon="ui-icon ui-icon-power"
+				value="#{messages['menu.menuitem.quit']}" url="/index.jsp" />
+
+			<p:menuitem icon="ui-icon ui-icon-help"
+				value="#{messages['menu.menuitem.help']}" url="/index.jsp" />
+
+		</p:menubar>
+
+	</h:form>
+
+</ui:composition>

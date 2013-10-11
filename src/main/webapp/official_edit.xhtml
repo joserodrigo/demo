@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['boton.guardar']}"
+						action="#{officialEditMB.insert}"
+						rendered="#{!officialEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['boton.guardar']}"
+						action="#{officialEditMB.update}"
+						rendered="#{officialEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['boton.eliminar']}"
+						onclick="confirmation.show()"
+						rendered="#{officialEditMB.updateMode}" type="button"
+						immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.eliminar']}"
+						showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.eliminar']}" severity="alert"
+						widgetVar="confirmation">
+						<h:commandButton value="#{messages['boton.dialog.yes']}"
+							action="#{officialEditMB.delete}" immediate="true" ajax="false" />
+						<h:commandButton value="#{messages['boton.dialog.no']}"
+							onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['funcionario.label']}" toggleable="true"
+				toggleSpeed="500">
+				<h:panelGrid id="fields" rows="7" columns="3">
+
+					<h:outputLabel value="#{messages['funcionario.label.Id']}: "
+						for="funid" styleClass="text-input" />
+					<h:inputText id="funid" value="#{funcionarioEditMB.bean.officialId}"
+						required="true" title="#{messages['funcionario.label.Id']}" />
+					<p:message for="funid" display="default" />
+
+					<h:outputLabel value="#{messages['funcionario.label.nombre']}: "
+						for="nombre" styleClass="text-input" />
+					<h:inputText id="nombre" value="#{officialEditMB.bean.nombre}"
+						required="true" title="#{messages['funcionario.label.nombre']}" />
+					<p:message for="nombre" display="default" />
+
+					<h:outputLabel value="#{messages['funcionario.label.apellido']}: "
+						for="apellido" styleClass="text-input" />
+					<h:inputText id="apellido" value="#{officialEditMB.bean.apellido}"
+						required="true" title="#{messages['funcionario.label.apellido']}" />
+					<p:message for="apellido" display="default" />
+
+					<h:outputLabel value="#{messages['funcionario.label.direccion']}: "
+						for="direccion" styleClass="text-input" />
+					<h:inputText id="direccion" value="#{officialEditMB.bean.direccion}"
+						title="#{messages['funcionario.label.direccion']}" required="true" />
+					<p:message for="direccion" display="default" />
+
+					<h:outputLabel value="#{messages['funcionario.label.telefono']}: "
+						for="telefono" styleClass="text-input" />
+					<h:inputText id="telefono" value="#{officialEditMB.bean.telefono}"
+						title="#{messages['funcionario.label.telefono']}" />
+					<p:message for="telefono" />
+<!---->
+<!--					<h:outputLabel value="#{messages['usuario.label.activo']}:" />-->
+<!--					<h:selectOneRadio value="#{usuarioEditMB.bean.activo}"-->
+<!--						partialSubmit="true">-->
+<!--						<f:selectItem itemValue="Y" itemLabel="Yes" />-->
+<!--						<f:selectItem itemValue="N" itemLabel="No" />-->
+<!--					</h:selectOneRadio>-->
+<!--					<br />-->
+
+
+					<h:outputLabel value="#{messages['funcionario.label.Section']}:" />
+					<h:selectOneListbox value="#{officialEditMB.bean.section.sectionId}"
+						size="1">
+						<f:selectItems var="section" value="#{officialEditMB.Sectiones}"
+							itemLabel="#{section.sectiondesc}" itemValue="#{section.sectionId}" />
+					</h:selectOneListbox>
+					<br />
+
+					<h:outputLabel value="#{messages['funcionario.label.email']}: "
+						for="email" styleClass="text-input" />
+					<h:inputText id="email" value="#{officialEditMB.bean.email}"
+						title="#{messages['funcionario.label.email']}" />
+					<p:message for="email" />
+
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
