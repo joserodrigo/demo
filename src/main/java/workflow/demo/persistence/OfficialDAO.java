@@ -31,19 +31,20 @@ public class OfficialDAO extends JPACrud<Official, Integer> {
 	@SuppressWarnings("unchecked")
 	public List<Official> findPage(int pageSize, int first, String sortField,
 			boolean sortOrderAsc) {
-
+		List<Official> lista = null;
 		String order = "asc";
 		if (!sortOrderAsc)
 			order = "desc";
 
 		Query q = em
-				.createQuery("select o.nombre,o.apellido,o.telefono, o.email, s.sectiondesc "
-						+ " from Official as o, Section as s where o.Section.sectionId=s.sectionId order by "
+				.createQuery("select new Official(o.officialId, o.nombre,o.apellido,o.direccion, o.telefono, o.email, s) "
+						+ " from Official as o join o.section as s where o.section.sectionId=s.sectionId order by "
 						+ sortField + " " + order);
 		q.setFirstResult(first);
 		q.setMaxResults(pageSize);
 
-		return (List<Official>) q.getResultList();
+		lista = (List<Official>) q.getResultList();
+		return lista;
 
 	}
 

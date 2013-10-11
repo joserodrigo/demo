@@ -6,7 +6,7 @@
 	<!--
 	-->
 	<persistence-unit name="bookmark-ds" transaction-type="RESOURCE_LOCAL">
-		<non-jta-data-source>java:/workflow</non-jta-data-source>
+		<non-jta-data-source>java:/DefaultDS</non-jta-data-source>
 		
 		<class>workflow.demo.domain.Bookmark</class>
 		<class>workflow.demo.domain.Rol</class>
@@ -30,6 +30,7 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup" />
 		</properties>
 	</persistence-unit>
