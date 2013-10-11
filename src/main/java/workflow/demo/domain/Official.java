@@ -35,10 +35,10 @@ public class Official implements Serializable {
 	@Column(name = "email")
 	private String email;
 
-	// relacion Many to One con Section del funcionario
+	// relacion Many to One con section del funcionario
 	@ManyToOne
 	@JoinColumn(name = "sectionId")
-	private Section Section;
+	private Section section;
 
 	// relacion One to Many con Viaticos
 	@OneToMany
@@ -50,19 +50,23 @@ public class Official implements Serializable {
 
 	public Official() {
 		super();
-		this.Section = new Section();
+		this.section = new Section();
 	}
-
+	
 	public Official(Integer officialId, String nombre, String apellido,
-			String direccion, String telefono, String email, Section section) {
-
+			String direccion, String telefono, String email) {
 		this.officialId = officialId;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.email = email;
-		this.Section = section;
+	}
+
+	public Official(Integer officialId, String nombre, String apellido,
+			String direccion, String telefono, String email, Section section) {
+		this(officialId, nombre, apellido, direccion, telefono, email);
+		setSection(section);
 	}
 	
 //	public Official(String nombre, String apellido, String telefono,
@@ -138,12 +142,12 @@ public class Official implements Serializable {
 
 	public void setSection(Section section) {
 
-		this.Section = section;
+		this.section = section;
 	}
 
 	public Section getSection() {
 
-		return Section;
+		return section;
 	}
 
 	public void setTypeOne(List<TypeOne> typeOne) {

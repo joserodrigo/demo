@@ -8,8 +8,6 @@ import org.ticpy.tekoporu.transaction.Transactional;
 import workflow.demo.domain.Official;
 import workflow.demo.domain.Section;
 import workflow.demo.persistence.OfficialDAO;
-import workflow.demo.persistence.SectionDAO;
-
 
 public class OfficialBC extends DelegateCrud<Official, Integer, OfficialDAO> {
 
@@ -19,7 +17,7 @@ public class OfficialBC extends DelegateCrud<Official, Integer, OfficialDAO> {
 	private OfficialDAO officialDAO;
 
 	@Inject
-	private SectionDAO sectionDAO;
+	private SectionBC sectionBC;
 
 	@Startup
 	@Transactional
@@ -27,7 +25,10 @@ public class OfficialBC extends DelegateCrud<Official, Integer, OfficialDAO> {
 
 		if (findAll().isEmpty()) {
 
-			List<Section> list = sectionDAO.findAll();
+			if (sectionBC.findAll().isEmpty())
+				sectionBC.insertTestData();
+
+			List<Section> list = sectionBC.findAll();
 			Section section1 = list.get(0);
 			Section section2 = list.get(1);
 			Section section3 = list.get(2);

@@ -14,16 +14,13 @@ public class SectionBC extends DelegateCrud<Section, Long, SectionDAO> {
 
 	@Inject
 	private SectionDAO sectionDAO;
-	
+
 	@Startup
 	@Transactional
 	public void load() {
+
 		if (findAll().isEmpty()) {
-			insert(new Section("Informatica"));
-			insert(new Section("Contabilidad"));
-			insert(new Section("Recursos Humanos"));
-			insert(new Section("Direccion General de Finanzas"));
-			insert(new Section("Extraccion de Renumeraciones"));
+			insertTestData();
 		}
 	}
 
@@ -36,5 +33,14 @@ public class SectionBC extends DelegateCrud<Section, Long, SectionDAO> {
 	public int count() {
 
 		return sectionDAO.count();
+	}
+
+	public void insertTestData() {
+
+		insert(new Section("Informatica"));
+		insert(new Section("Contabilidad"));
+		insert(new Section("Recursos Humanos"));
+		insert(new Section("Direccion General de Finanzas"));
+		insert(new Section("Extraccion de Renumeraciones"));
 	}
 }
